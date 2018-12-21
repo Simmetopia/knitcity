@@ -15,11 +15,12 @@
     "typescript": "3.2.2"
   },
   "scripts": {
-    "start:prod": "yarn build && yarn serve -s build",
+    "start:prod": "yarn serve -s build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "yarn build"
   },
   "eslintConfig": {
     "extends": "react-app"
