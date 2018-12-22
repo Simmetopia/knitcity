@@ -1,25 +1,26 @@
-import React, { Component, FC, useState } from "react";
-import { Paper, TextField, Typography, Grid } from "@material-ui/core";
-import logo from "./logo.svg";
+import {
+  Grid,
+  Paper,
+  TextField,
+  WithStyles,
+  withStyles,
+  createStyles,
+  Theme
+} from "@material-ui/core";
+import React, { FC, useState } from "react";
 import "./App.css";
-
-const App: FC = () => {
+import BackgroundWrapper from "./backgroundWrapper";
+import { calculateKnitting } from "./util";
+import Header from "./Header";
+const App: FC<WithStyles<typeof styles>> = ({ classes }) => {
   const [currentMasks, setCurrentMasks] = useState(0);
   const [masksToInsertOrRemove, setMasksToInsertOrRemove] = useState(0);
 
+  const { paperRoot } = classes;
   return (
-    <div
-      style={{
-        display: "flex",
-        alignContent: "center",
-        justifyContent: "center"
-      }}
-    >
-      <Paper
-        style={{
-          padding: 16
-        }}
-      >
+    <BackgroundWrapper>
+      <Header />
+      <div className={paperRoot}>
         <Grid
           container
           spacing={8}
@@ -31,6 +32,7 @@ const App: FC = () => {
             <TextField
               variant="outlined"
               label="Antal masker"
+              fullWidth
               value={currentMasks === 0 ? "" : currentMasks}
               type="number"
               onChange={e => {
@@ -43,6 +45,7 @@ const App: FC = () => {
               variant="outlined"
               label="Indsæt"
               type="number"
+              fullWidth
               value={masksToInsertOrRemove == 0 ? "" : masksToInsertOrRemove}
               onChange={e => {
                 setMasksToInsertOrRemove(Number(e.target.value));
@@ -53,48 +56,21 @@ const App: FC = () => {
             {calculateKnitting(currentMasks, masksToInsertOrRemove)}
           </Grid>
         </Grid>
-      </Paper>
-    </div>
+      </div>
+    </BackgroundWrapper>
   );
 };
 
-const showResult = (maskStat: number[]) => {
-  switch (maskStat.length) {
-    case 0: {
-      return <Typography variant="h4">ingen input endnu</Typography>;
+const styles = (theme: Theme) =>
+  createStyles({
+    paperRoot: {
+      padding: 16,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)"
+      // backgroundColor: theme.palette.primary.light
     }
-    case 1: {
-      return (
-        <Typography variant="h4">
-          {`Du skal sætte 1 maske ind for hver ${maskStat[0]}`}
-        </Typography>
-      );
-    }
-    default: {
-      return maskStat.map((value, index) => (
-        <Typography
-          key={index}
-          variant="h4"
-        >{`Strik ${value} sæt 1 ind`}</Typography>
-      ));
-    }
-  }
-};
+  });
 
-const calculateKnitting = (
-  currentMasks: number,
-  masksToInsertOrRemove: number
-) => {
-  if (currentMasks === 0 || masksToInsertOrRemove === 0) {
-    return showResult([]);
-  }
-  const temp = currentMasks / masksToInsertOrRemove;
-  const floored = Math.floor(temp);
-  const roofed = Math.ceil(temp);
-  if (floored === roofed) {
-    return showResult([temp]);
-  }
-  return showResult([floored, roofed]);
-};
-
-export default App;
+export default withStyles(styles)(App);
