@@ -18,7 +18,7 @@
   "scripts": {
     "start:prod": "yarn serve -s build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn bsb -make-world && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "yarn build"
