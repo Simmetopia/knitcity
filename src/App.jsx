@@ -1,21 +1,12 @@
-import {
-  Grid,
-  Paper,
-  TextField,
-  WithStyles,
-  withStyles,
-  createStyles,
-  Theme
-} from "@material-ui/core";
-import React, { FC, useState } from "react";
-import "./App.css";
+import { Grid, TextField, withStyles, createStyles } from "@material-ui/core";
+import React, { useState } from "react";
 import BackgroundWrapper from "./backgroundWrapper";
-import { calculateKnitting } from "./util";
 import Header from "./Header";
-const App: FC<WithStyles<typeof styles>> = ({ classes }) => {
+import calculateKnit, { resultJs as Results } from "./util.bs";
+import CounterRow from "./RowCalc.bs";
+const App = ({ classes }) => {
   const [currentMasks, setCurrentMasks] = useState(0);
   const [masksToInsertOrRemove, setMasksToInsertOrRemove] = useState(0);
-
   const { paperRoot } = classes;
   return (
     <BackgroundWrapper>
@@ -46,22 +37,26 @@ const App: FC<WithStyles<typeof styles>> = ({ classes }) => {
               label="Indsæt"
               type="number"
               fullWidth
-              value={masksToInsertOrRemove == 0 ? "" : masksToInsertOrRemove}
+              value={masksToInsertOrRemove === 0 ? "" : masksToInsertOrRemove}
               onChange={e => {
                 setMasksToInsertOrRemove(Number(e.target.value));
               }}
             />
           </Grid>
           <Grid item>
-            {calculateKnitting(currentMasks, masksToInsertOrRemove)}
+            <Results
+              results={calculateKnit(currentMasks, masksToInsertOrRemove)}
+            />
+          </Grid>
+          <Grid item>
+            <CounterRow />
           </Grid>
         </Grid>
       </div>
     </BackgroundWrapper>
   );
 };
-
-const styles = (theme: Theme) =>
+const styles = theme =>
   createStyles({
     paperRoot: {
       padding: 16,
@@ -72,5 +67,4 @@ const styles = (theme: Theme) =>
       // backgroundColor: theme.palette.primary.light
     }
   });
-
 export default withStyles(styles)(App);
