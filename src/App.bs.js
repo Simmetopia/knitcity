@@ -7,6 +7,7 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Grid$MyProjectName = require("./Grid.bs.js");
 var TextField$MyProjectName = require("./TextField.bs.js");
+var BackgroundWrapper$MyProjectName = require("./BackgroundWrapper.bs.js");
 
 function initialState(param) {
   return /* record */[
@@ -44,9 +45,19 @@ function make(_children) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               var match = self[/* state */1][/* currentMasks */0] === 0;
-              return React.createElement("div", undefined, ReasonReact.element(undefined, undefined, Grid$MyProjectName.make(true, /* center */98248149, undefined, /* column */-963948842, /* center */98248149, undefined, /* array */[ReasonReact.element(undefined, undefined, Grid$MyProjectName.make(undefined, undefined, undefined, undefined, undefined, true, /* array */[ReasonReact.element(undefined, undefined, TextField$MyProjectName.make(match ? "" : String(self[/* state */1][/* currentMasks */0]), true, (function (e) {
-                                                        return Curry._1(self[/* send */3], e.target.value);
-                                                      }), "Antal masker", /* number */561678025, /* outlined */613841570, /* array */[]))]))])));
+              var match$1 = self[/* state */1][/* masksToInsert */1] === 0;
+              return React.createElement("div", {
+                          className: BackgroundWrapper$MyProjectName.Styles[/* root */0]
+                        }, React.createElement("div", {
+                              className: BackgroundWrapper$MyProjectName.Styles[/* innerRoot */1]
+                            }, ReasonReact.element(undefined, undefined, Grid$MyProjectName.make(/* center */98248149, undefined, /* column */-963948842, /* center */98248149, /* ThirtyTwo */3, /* array */[
+                                      ReasonReact.element(undefined, undefined, Grid$MyProjectName.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$MyProjectName.make(match ? "" : String(self[/* state */1][/* currentMasks */0]), true, (function (e) {
+                                                            return Curry._1(self[/* send */3], /* SetCurrentMasks */Block.__(0, [e.target.value]));
+                                                          }), "Antal masker", /* number */561678025, /* outlined */613841570, /* array */[]))])),
+                                      ReasonReact.element(undefined, undefined, Grid$MyProjectName.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$MyProjectName.make(match$1 ? "" : String(self[/* state */1][/* masksToInsert */1]), true, (function (e) {
+                                                            return Curry._1(self[/* send */3], /* SetMasksToInsert */Block.__(1, [e.target.value]));
+                                                          }), "Indsæt", /* number */561678025, /* outlined */613841570, /* array */[]))]))
+                                    ]))));
             }),
           /* initialState */initialState,
           /* retainedProps */component[/* retainedProps */11],

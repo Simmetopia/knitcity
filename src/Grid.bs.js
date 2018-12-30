@@ -134,20 +134,44 @@ function justifyFromJs(param) {
   return Js_mapperRt.revSearch(6, jsMapperConstantArray$3, param);
 }
 
-function make(container, $staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, item, children) {
+var jsMapperConstantArray$4 = /* array */[
+  0,
+  8,
+  16,
+  32
+];
+
+function spacingToJs(param) {
+  return Js_mapperRt.toInt(param, jsMapperConstantArray$4);
+}
+
+function spacingFromJs(param) {
+  return Js_mapperRt.fromInt(4, jsMapperConstantArray$4, param);
+}
+
+function make($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, children) {
   var alignContent = $staropt$star !== undefined ? $staropt$star : /* flexStart */662439529;
   var alignItems = $staropt$star$1 !== undefined ? $staropt$star$1 : /* flexStart */662439529;
   var direction = $staropt$star$2 !== undefined ? $staropt$star$2 : /* row */5693978;
   var justify = $staropt$star$3 !== undefined ? $staropt$star$3 : /* flexStart */662439529;
+  var spacing = $staropt$star$4 !== undefined ? $staropt$star$4 : /* Zero */0;
   return ReasonReact.wrapJsForReason(Grid.default, {
               alignContent: alignContentToJs(alignContent),
               alignItems: alignItemsToJs(alignItems),
               direction: directionToJs(direction),
               justify: justifyToJs(justify),
-              container: Js_null_undefined.fromOption(container),
-              item: Js_null_undefined.fromOption(item)
+              spacing: spacingToJs(spacing),
+              container: true
             }, children);
 }
+
+function make$1(ml, children) {
+  return ReasonReact.wrapJsForReason(Grid.default, {
+              ml: Js_null_undefined.fromOption(ml)
+            }, children);
+}
+
+var Item = /* module */[/* make */make$1];
 
 exports.alignContentToJs = alignContentToJs;
 exports.alignContentFromJs = alignContentFromJs;
@@ -157,5 +181,8 @@ exports.directionToJs = directionToJs;
 exports.directionFromJs = directionFromJs;
 exports.justifyToJs = justifyToJs;
 exports.justifyFromJs = justifyFromJs;
+exports.spacingToJs = spacingToJs;
+exports.spacingFromJs = spacingFromJs;
 exports.make = make;
+exports.Item = Item;
 /* ReasonReact Not a pure module */

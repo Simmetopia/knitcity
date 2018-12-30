@@ -24,23 +24,47 @@ let make = _children => {
   reducer,
   initialState,
   render: self =>
-    <div>
-      <Grid
-        container=true direction=`column alignContent=`center justify=`center>
-        <Grid item=true>
-          <TextField
-            variant=`outlined
-            label={ReasonReact.string("Antal masker")}
-            fullWidth=true
-            value={
-              self.state.currentMasks === 0 ?
-                "" : string_of_int(self.state.currentMasks)
-            }
-            type_=`number
-            onChange={e => self.send(ReactEvent.Form.target(e)##value)}
-          />
+    <div className=BackgroundWrapper.Styles.root>
+      <div className=BackgroundWrapper.Styles.innerRoot>
+        <Grid
+          spacing=ThirtyTwo
+          direction=`column
+          alignContent=`center
+          justify=`center>
+          <Grid.Item>
+            <TextField
+              variant=`outlined
+              label={ReasonReact.string("Antal masker")}
+              fullWidth=true
+              value={
+                self.state.currentMasks === 0 ?
+                  "" : string_of_int(self.state.currentMasks)
+              }
+              type_=`number
+              onChange={e =>
+                self.send(SetCurrentMasks(ReactEvent.Form.target(e)##value))
+              }
+            />
+          </Grid.Item>
+          <Grid.Item>
+            <TextField
+              variant=`outlined
+              label={ReasonReact.string({js|Indsæt|js})}
+              type_=`number
+              fullWidth=true
+              value={
+                self.state.masksToInsert === 0 ?
+                  "" : string_of_int(self.state.masksToInsert)
+              }
+              onChange={e =>
+                self.send(
+                  SetMasksToInsert(ReactEvent.Form.target(e)##value),
+                )
+              }
+            />
+          </Grid.Item>
         </Grid>
-      </Grid>
+      </div>
     </div>,
 };
 

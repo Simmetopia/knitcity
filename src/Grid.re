@@ -38,36 +38,53 @@ type justify = [
   | [@bs.as "space-evenly"] `spaceEvenly
 ];
 
+[@bs.deriving jsConverter]
+type spacing =
+  | Zero
+  | [@bs.as 8] Eight
+  | [@bs.as 16] Sixteen
+  | [@bs.as 32] ThirtyTwo;
+
 [@bs.deriving abstract]
 type jsProps = {
-  alignContent: Js.nullable(string),
+  alignContent: string,
   alignItems: string,
   direction: string,
   justify: string,
-  container: Js.nullable(bool),
-  item: Js.nullable(bool),
+  spacing: int,
+  container: bool,
 };
 
 let make =
     (
-      ~container=?,
-      ~alignContent:option(alignContent)=?,
-      ~alignItems=?,
-      ~direction=?,
-      ~justify=?,
-      ~item=?,
+      ~alignContent=`flexStart,
+      ~alignItems=`flexStart,
+      ~direction=`row,
+      ~justify=`flexStart,
+      ~spacing=Zero,
       children,
     ) =>
   ReasonReact.wrapJsForReason(
     ~reactClass=grid,
     ~props=
       jsProps(
-        ~container=container |> Js.Nullable.fromOption,
-        ~alignContent= Some(alignContentToJs(Js.Option.getExn(alignContent))) |> Js.Nullable.fromOption ,
+        ~container=true,
+        ~alignContent=alignContent |> alignContentToJs,
         ~alignItems=alignItems |> alignItemsToJs,
         ~direction=direction |> directionToJs,
         ~justify=justify |> justifyToJs,
-        ~item=item |> Js.Nullable.fromOption,
+        ~spacing=spacing |> spacingToJs,
       ),
     children,
   );
+
+module Item = {
+  [@bs.deriving abstract]
+  type jsProps = {ml: Js.nullable(int)};
+  let make = (~ml=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=grid,
+      ~props=jsProps(~ml=ml |> Js.Nullable.fromOption),
+      children,
+    );
+};

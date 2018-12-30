@@ -8,12 +8,13 @@
     "@types/node": "10.12.18",
     "@types/react": "16.7.17",
     "@types/react-dom": "16.0.11",
+    "bs-css": "^8.0.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-scripts": "2.1.1",
+    "reason-react": "^0.5.3",
     "serve": "^10.1.1",
-    "typescript": "3.2.2",
-    "reason-react": "^0.5.3"
+    "typescript": "3.2.2"
   },
   "scripts": {
     "start:prod": "yarn serve -s build",
