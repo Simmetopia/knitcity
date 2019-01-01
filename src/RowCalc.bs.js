@@ -5,6 +5,7 @@ var Css = require("bs-css/src/Css.js");
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var App$KnitZilla = require("./App.bs.js");
 var Grid$KnitZilla = require("./mat-bindings/Grid.bs.js");
@@ -47,10 +48,16 @@ function initialState(param) {
 }
 
 function reducer(action, state) {
-  if (action) {
-    return /* Update */Block.__(0, [/* record */[/* rows */0]]);
+  if (typeof action === "number") {
+    if (action !== 0) {
+      localStorage.setItem("rows", "0");
+      return /* Update */Block.__(0, [/* record */[/* rows */0]]);
+    } else {
+      localStorage.setItem("rows", String(state[/* rows */0] + 1 | 0));
+      return /* Update */Block.__(0, [/* record */[/* rows */state[/* rows */0] + 1 | 0]]);
+    }
   } else {
-    return /* Update */Block.__(0, [/* record */[/* rows */state[/* rows */0] + 1 | 0]]);
+    return /* Update */Block.__(0, [/* record */[/* rows */action[0]]]);
   }
 }
 
@@ -62,7 +69,14 @@ function make(_children) {
           /* reactClassInternal */component[/* reactClassInternal */1],
           /* handedOffState */component[/* handedOffState */2],
           /* willReceiveProps */component[/* willReceiveProps */3],
-          /* didMount */component[/* didMount */4],
+          /* didMount */(function (self) {
+              var value = localStorage.getItem("rows");
+              if (value !== null) {
+                return Curry._1(self[/* send */3], /* Set */[Caml_format.caml_int_of_string(value)]);
+              } else {
+                return /* () */0;
+              }
+            }),
           /* didUpdate */component[/* didUpdate */5],
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],

@@ -14,14 +14,22 @@ type state = {rows: int};
 
 type actions =
   | Increment
-  | Reset;
+  | Reset
+  | Set(int);
 
 let initialState = () => {rows: 0};
 
 let reducer = (action, state) => {
   switch (action) {
-  | Increment => ReasonReact.Update({rows: state.rows + 1})
-  | Reset => ReasonReact.Update({rows: 0})
+  | Increment =>
+    Dom.Storage.(
+      localStorage |> setItem("rows", string_of_int(state.rows + 1))
+    );
+    ReasonReact.Update({rows: state.rows + 1});
+  | Reset =>
+    Dom.Storage.(localStorage |> setItem("rows", "0"));
+    ReasonReact.Update({rows: 0});
+  | Set(toSet) => ReasonReact.Update({rows: toSet})
   };
 };
 
@@ -30,6 +38,13 @@ let make = _children => {
   ...component,
   reducer,
   initialState,
+  didMount: self => {
+    let value = Dom.Storage.(localStorage |> getItem("rows"));
+    switch (value) {
+    | Some(data) => self.send(Set(int_of_string(data)))
+    | None => ()
+    };
+  },
   render: self => {
     <>
       <div className=App.Styles.innerRoot>
