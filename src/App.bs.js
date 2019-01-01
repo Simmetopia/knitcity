@@ -134,7 +134,7 @@ function make$1(_children) {
           /* render */(function (self) {
               var match = self[/* state */1][/* currentMasks */0] === 0;
               var match$1 = self[/* state */1][/* masksToInsert */1] === 0;
-              return React.createElement(React.Fragment, undefined, ReasonReact.element(undefined, undefined, make(/* array */[])), React.createElement("div", {
+              return React.createElement(React.Fragment, undefined, React.createElement("div", {
                               className: innerRoot
                             }, ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, /* center */98248149, /* column */-963948842, /* center */98248149, /* Sixteen */2, /* array */[
                                       ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$KnitZilla.make(match ? "" : String(self[/* state */1][/* currentMasks */0]), true, (function (e) {

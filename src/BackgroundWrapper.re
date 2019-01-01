@@ -47,6 +47,7 @@ let make = _children => {
   initialState: () => {activeRoute: Home},
   render: self =>
     <div className=Styles.root>
+      <App.Header />
       {switch (self.state.activeRoute) {
        | Home => <App />
        | Calc => <RowCalc />

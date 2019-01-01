@@ -78,7 +78,7 @@ function make(_children) {
               var match = self[/* state */1][/* activeRoute */0];
               return React.createElement("div", {
                           className: root
-                        }, match ? ReasonReact.element(undefined, undefined, RowCalc$KnitZilla.make(/* array */[])) : ReasonReact.element(undefined, undefined, App$KnitZilla.make(/* array */[])));
+                        }, ReasonReact.element(undefined, undefined, App$KnitZilla.Header[/* make */2](/* array */[])), match ? ReasonReact.element(undefined, undefined, RowCalc$KnitZilla.make(/* array */[])) : ReasonReact.element(undefined, undefined, App$KnitZilla.make(/* array */[])));
             }),
           /* initialState */(function (param) {
               return /* record */[/* activeRoute : Home */0];

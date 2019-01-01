@@ -65,7 +65,6 @@ let make = _children => {
   initialState: () => {currentMasks: 0, masksToInsert: 0},
   render: self => {
     <>
-      <Header />
       <div className=Styles.innerRoot>
         <Grid
           spacing=Sixteen direction=`column alignItems=`center justify=`center>

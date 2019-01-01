@@ -9,7 +9,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var App$KnitZilla = require("./App.bs.js");
 var Grid$KnitZilla = require("./mat-bindings/Grid.bs.js");
 var Button$KnitZilla = require("./mat-bindings/button.bs.js");
-var TextField$KnitZilla = require("./mat-bindings/TextField.bs.js");
+var Typography$KnitZilla = require("./mat-bindings/Typography.bs.js");
 var NavigationIcons$KnitZilla = require("./mat-bindings/NavigationIcons.bs.js");
 
 var floatingRightSideBack = Css.style(/* :: */[
@@ -26,7 +26,21 @@ var floatingRightSideBack = Css.style(/* :: */[
       ]
     ]);
 
-var Styles = /* module */[/* floatingRightSideBack */floatingRightSideBack];
+var numberWrapper = Css.style(/* :: */[
+      Css.border(Css.px(1), Css.solid, Css.rgba(0, 0, 0, 0.87)),
+      /* :: */[
+        Css.borderRadius(Css.px(5)),
+        /* :: */[
+          Css.padding2(Css.px(12), Css.px(24)),
+          /* [] */0
+        ]
+      ]
+    ]);
+
+var Styles = /* module */[
+  /* floatingRightSideBack */floatingRightSideBack,
+  /* numberWrapper */numberWrapper
+];
 
 function initialState(param) {
   return /* record */[/* rows */0];
@@ -57,9 +71,9 @@ function make(_children) {
               return React.createElement(React.Fragment, undefined, React.createElement("div", {
                               className: App$KnitZilla.Styles[/* innerRoot */0]
                             }, ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, /* center */98248149, /* column */-963948842, undefined, undefined, /* array */[
-                                      ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$KnitZilla.make(String(self[/* state */1][/* rows */0]), true, (function (_e) {
-                                                            return /* () */0;
-                                                          }), "Maske antal", /* number */561678025, /* outlined */613841570, true, /* array */[]))])),
+                                      ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[React.createElement("div", {
+                                                      className: numberWrapper
+                                                    }, ReasonReact.element(undefined, undefined, Typography$KnitZilla.make(/* h6 */23246, undefined, undefined, /* array */[String(self[/* state */1][/* rows */0])])))])),
                                       ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, undefined, undefined, undefined, undefined, /* array */[
                                                           ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Button$KnitZilla.make(/* text */-856044371, (function (_e) {
                                                                                 return Curry._1(self[/* send */3], /* Increment */0);
