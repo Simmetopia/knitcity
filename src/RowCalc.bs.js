@@ -3,10 +3,10 @@
 
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
-var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Util$MyProjectName = require("./util.bs.js");
-var Button$MyProjectName = require("./button.bs.js");
+var Grid$KnitZilla = require("./mat-bindings/Grid.bs.js");
+var Button$KnitZilla = require("./mat-bindings/button.bs.js");
+var Typography$KnitZilla = require("./mat-bindings/Typography.bs.js");
 
 function initialState(param) {
   return /* record */[/* rows */0];
@@ -34,11 +34,17 @@ function make(_children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              return React.createElement("div", undefined, ReasonReact.element(undefined, undefined, Util$MyProjectName.TypographyWrapper[/* make */0](/* array */[String(self[/* state */1][/* rows */0])])), ReasonReact.element(undefined, undefined, Button$MyProjectName.make(/* text */-856044371, (function (_e) {
-                                    return Curry._1(self[/* send */3], /* Increment */0);
-                                  }), /* array */["+1"])), ReasonReact.element(undefined, undefined, Button$MyProjectName.make(/* text */-856044371, (function (_e) {
-                                    return Curry._1(self[/* send */3], /* Reset */1);
-                                  }), /* array */["Reset"])));
+              return ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, /* center */98248149, /* column */-963948842, undefined, undefined, /* array */[
+                              ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Typography$KnitZilla.make(/* h6 */23246, undefined, undefined, /* array */[String(self[/* state */1][/* rows */0])]))])),
+                              ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, undefined, undefined, undefined, undefined, /* array */[
+                                                  ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Button$KnitZilla.make(/* text */-856044371, (function (_e) {
+                                                                        return Curry._1(self[/* send */3], /* Increment */0);
+                                                                      }), undefined, /* array */["+1"]))])),
+                                                  ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Button$KnitZilla.make(/* text */-856044371, (function (_e) {
+                                                                        return Curry._1(self[/* send */3], /* Reset */1);
+                                                                      }), undefined, /* array */["Reset"]))]))
+                                                ]))]))
+                            ]));
             }),
           /* initialState */initialState,
           /* retainedProps */component[/* retainedProps */11],
@@ -47,44 +53,8 @@ function make(_children) {
         ];
 }
 
-var InnerReason = /* module */[
-  /* initialState */initialState,
-  /* reducer */reducer,
-  /* component */component,
-  /* make */make
-];
-
-var component$1 = ReasonReact.statelessComponent("wrapper");
-
-function make$1(_children) {
-  return /* record */[
-          /* debugName */component$1[/* debugName */0],
-          /* reactClassInternal */component$1[/* reactClassInternal */1],
-          /* handedOffState */component$1[/* handedOffState */2],
-          /* willReceiveProps */component$1[/* willReceiveProps */3],
-          /* didMount */component$1[/* didMount */4],
-          /* didUpdate */component$1[/* didUpdate */5],
-          /* willUnmount */component$1[/* willUnmount */6],
-          /* willUpdate */component$1[/* willUpdate */7],
-          /* shouldUpdate */component$1[/* shouldUpdate */8],
-          /* render */(function (_self) {
-              return ReasonReact.element(undefined, undefined, make(/* array */[]));
-            }),
-          /* initialState */component$1[/* initialState */10],
-          /* retainedProps */component$1[/* retainedProps */11],
-          /* reducer */component$1[/* reducer */12],
-          /* jsElementWrapped */component$1[/* jsElementWrapped */13]
-        ];
-}
-
-var $$default = ReasonReact.wrapReasonForJs(component$1, (function (jsProps) {
-        return make$1(jsProps.children);
-      }));
-
-exports.InnerReason = InnerReason;
-exports.component = component$1;
-exports.make = make$1;
-exports.$$default = $$default;
-exports.default = $$default;
-exports.__esModule = true;
+exports.initialState = initialState;
+exports.reducer = reducer;
+exports.component = component;
+exports.make = make;
 /* component Not a pure module */

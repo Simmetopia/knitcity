@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App.bs";
+import App from "./BackgroundWrapper.bs";
 import * as serviceWorker from "./serviceWorker";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import theme from "./theme";

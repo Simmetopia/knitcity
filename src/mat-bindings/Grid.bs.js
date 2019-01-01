@@ -167,7 +167,8 @@ function make($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, 
 
 function make$1(ml, children) {
   return ReasonReact.wrapJsForReason(Grid.default, {
-              ml: Js_null_undefined.fromOption(ml)
+              ml: Js_null_undefined.fromOption(ml),
+              item: true
             }, children);
 }
 

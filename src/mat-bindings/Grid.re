@@ -80,11 +80,14 @@ let make =
 
 module Item = {
   [@bs.deriving abstract]
-  type jsProps = {ml: Js.nullable(int)};
+  type jsProps = {
+    ml: Js.nullable(int),
+    item: bool,
+  };
   let make = (~ml=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=grid,
-      ~props=jsProps(~ml=ml |> Js.Nullable.fromOption),
+      ~props=jsProps(~ml=ml |> Js.Nullable.fromOption, ~item=true),
       children,
     );
 };

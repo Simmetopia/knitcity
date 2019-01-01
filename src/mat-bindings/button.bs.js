@@ -38,7 +38,26 @@ function variantFromJs(param) {
   return Js_mapperRt.revSearch(5, jsMapperConstantArray, param);
 }
 
-function make(variant, onClick, children) {
+var jsMapperConstantArray$1 = /* array */[
+  /* tuple */[
+    -499495052,
+    "secondary"
+  ],
+  /* tuple */[
+    58474434,
+    "primary"
+  ]
+];
+
+function colorToJs(param) {
+  return Js_mapperRt.binarySearch(2, param, jsMapperConstantArray$1);
+}
+
+function colorFromJs(param) {
+  return Js_mapperRt.revSearch(2, jsMapperConstantArray$1, param);
+}
+
+function make(variant, onClick, color, children) {
   var tmp = {
     onClick: onClick
   };
@@ -46,10 +65,16 @@ function make(variant, onClick, children) {
   if (tmp$1 !== undefined) {
     tmp.variant = Caml_option.valFromOption(tmp$1);
   }
+  var tmp$2 = Js_option.map(colorToJs, color);
+  if (tmp$2 !== undefined) {
+    tmp.color = Caml_option.valFromOption(tmp$2);
+  }
   return ReasonReact.wrapJsForReason(Button.default, tmp, children);
 }
 
 exports.variantToJs = variantToJs;
 exports.variantFromJs = variantFromJs;
+exports.colorToJs = colorToJs;
+exports.colorFromJs = colorFromJs;
 exports.make = make;
 /* ReasonReact Not a pure module */

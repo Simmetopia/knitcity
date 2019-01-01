@@ -4,26 +4,30 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var TypographyWrapper = require("./TypographyWrapper");
+var Typography$KnitZilla = require("./mat-bindings/Typography.bs.js");
 
-function $$default(currentMasks, masksToInsertOrRemove) {
+function calculateMasks(currentMasks, masksToInsertOrRemove) {
   if (currentMasks !== 0) {
     if (masksToInsertOrRemove !== 0) {
-      var temp = currentMasks / masksToInsertOrRemove;
-      var floored = Math.floor(temp);
-      var ceiled = Math.ceil(temp);
-      var diff = temp - floored;
-      if (diff > 0.85) {
-        return /* array */[ceiled];
-      } else if (diff < 0.15) {
-        return /* array */[floored];
-      } else if (diff === 0) {
-        return /* array */[temp];
+      if (masksToInsertOrRemove > currentMasks) {
+        return /* array */[];
       } else {
-        return /* array */[
-                floored,
-                ceiled
-              ];
+        var temp = currentMasks / masksToInsertOrRemove;
+        var floored = Math.floor(temp);
+        var ceiled = Math.ceil(temp);
+        var diff = temp - floored;
+        if (diff > 0.85) {
+          return /* array */[ceiled];
+        } else if (diff < 0.15) {
+          return /* array */[floored];
+        } else if (diff === 0) {
+          return /* array */[temp];
+        } else {
+          return /* array */[
+                  floored,
+                  ceiled
+                ];
+        }
       }
     } else {
       return /* array */[];
@@ -33,15 +37,9 @@ function $$default(currentMasks, masksToInsertOrRemove) {
   }
 }
 
-function make(children) {
-  return ReasonReact.wrapJsForReason(TypographyWrapper.default, { }, children);
-}
-
-var TypographyWrapper$1 = /* module */[/* make */make];
-
 var component = ReasonReact.statelessComponent("Result");
 
-function make$1(results, _children) {
+function make(results, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -56,15 +54,15 @@ function make$1(results, _children) {
               var listLength = results.length;
               if (listLength !== 0) {
                 if (listLength !== 1) {
-                  return $$Array.map((function (result) {
-                                return ReasonReact.element(String(result), undefined, make(/* array */[" strik 1 maske ind pr " + (String(result) + " maske(r) ")]));
+                  return $$Array.mapi((function (index, result) {
+                                return ReasonReact.element(String(index), undefined, Typography$KnitZilla.make(undefined, undefined, undefined, /* array */[" strik 1 maske ind pr " + (String(result) + " maske(r) ")]));
                               }), results);
                 } else {
                   var result = Caml_array.caml_array_get(results, 0);
-                  return ReasonReact.element(undefined, undefined, make(/* array */[" Strik 1 maske ind pr " + (String(result) + " maske(r) ")]));
+                  return ReasonReact.element(undefined, undefined, Typography$KnitZilla.make(undefined, undefined, undefined, /* array */[" Strik 1 maske ind pr " + (String(result) + " maske(r) ")]));
                 }
               } else {
-                return ReasonReact.element(undefined, undefined, make(/* array */["Intet at udregne endnu"]));
+                return ReasonReact.element(undefined, undefined, Typography$KnitZilla.make(undefined, undefined, undefined, /* array */["Intet at udregne endnu"]));
               }
             }),
           /* initialState */component[/* initialState */10],
@@ -76,17 +74,9 @@ function make$1(results, _children) {
 
 var Result = /* module */[
   /* component */component,
-  /* make */make$1
+  /* make */make
 ];
 
-var resultJs = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
-        return make$1(jsProps.results, /* array */[]);
-      }));
-
-exports.$$default = $$default;
-exports.default = $$default;
-exports.__esModule = true;
-exports.TypographyWrapper = TypographyWrapper$1;
+exports.calculateMasks = calculateMasks;
 exports.Result = Result;
-exports.resultJs = resultJs;
 /* component Not a pure module */

@@ -1,3 +1,6 @@
+[@bs.val]
+external addEventListener: (string, ReactEvent.Touch.t => unit) => unit =
+  "window.addEventListener";
 module Styles = {
   open Css;
   let root =
@@ -12,12 +15,48 @@ module Styles = {
         ),
       ),
     ]);
-  let innerRoot =
-    style([
-      padding(px(16)),
-      position(absolute),
-      top(`percent(50.0)),
-      left(`percent(50.0)),
-      transform(translate(`percent(-50.0), `percent(-50.0))),
-    ]);
 };
+
+type routes =
+  | Home
+  | Calc;
+type state = {activeRoute: routes};
+
+type actions =
+  | Route(routes);
+
+let component = ReasonReact.reducerComponent("BackgroundWrapper");
+
+let make = _children => {
+  ...component,
+  didMount: self => {
+    let touchListen =
+      ReasonReact.Router.watchUrl(url =>
+        switch (url.path) {
+        | ["calc"] => self.send(Route(Calc))
+        | _ => self.send(Route(Home))
+        }
+      );
+    self.onUnmount(() => ReasonReact.Router.unwatchUrl(touchListen));
+  },
+  reducer: (action, _state) => {
+    switch (action) {
+    | Route(toChange) => ReasonReact.Update({activeRoute: toChange})
+    };
+  },
+  initialState: () => {activeRoute: Home},
+  render: self =>
+    <div className=Styles.root>
+      {switch (self.state.activeRoute) {
+       | Home => <App />
+       | Calc => <RowCalc />
+       }}
+    </div>,
+};
+[@bs.deriving abstract]
+type jsProps = {children: array(ReasonReact.reactElement)};
+
+let default =
+  ReasonReact.wrapReasonForJs(~component, jsProps =>
+    make(jsProps->childrenGet)
+  );

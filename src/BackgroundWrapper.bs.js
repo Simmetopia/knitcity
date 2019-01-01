@@ -2,6 +2,12 @@
 'use strict';
 
 var Css = require("bs-css/src/Css.js");
+var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
+var React = require("react");
+var ReasonReact = require("reason-react/src/ReasonReact.js");
+var App$KnitZilla = require("./App.bs.js");
+var RowCalc$KnitZilla = require("./RowCalc.bs.js");
 
 var root = Css.style(/* :: */[
       Css.height(/* `percent */[
@@ -41,39 +47,58 @@ var root = Css.style(/* :: */[
       ]
     ]);
 
-var innerRoot = Css.style(/* :: */[
-      Css.padding(Css.px(16)),
-      /* :: */[
-        Css.position(Css.absolute),
-        /* :: */[
-          Css.top(/* `percent */[
-                -119887163,
-                50.0
-              ]),
-          /* :: */[
-            Css.left(/* `percent */[
-                  -119887163,
-                  50.0
-                ]),
-            /* :: */[
-              Css.transform(Css.translate(/* `percent */[
-                        -119887163,
-                        -50.0
-                      ], /* `percent */[
-                        -119887163,
-                        -50.0
-                      ])),
-              /* [] */0
-            ]
-          ]
-        ]
-      ]
-    ]);
+var Styles = /* module */[/* root */root];
 
-var Styles = /* module */[
-  /* root */root,
-  /* innerRoot */innerRoot
-];
+var component = ReasonReact.reducerComponent("BackgroundWrapper");
+
+function make(_children) {
+  return /* record */[
+          /* debugName */component[/* debugName */0],
+          /* reactClassInternal */component[/* reactClassInternal */1],
+          /* handedOffState */component[/* handedOffState */2],
+          /* willReceiveProps */component[/* willReceiveProps */3],
+          /* didMount */(function (self) {
+              var touchListen = ReasonReact.Router[/* watchUrl */1]((function (url) {
+                      var match = url[/* path */0];
+                      if (match && match[0] === "calc" && !match[1]) {
+                        return Curry._1(self[/* send */3], /* Route */[/* Calc */1]);
+                      } else {
+                        return Curry._1(self[/* send */3], /* Route */[/* Home */0]);
+                      }
+                    }));
+              return Curry._1(self[/* onUnmount */4], (function (param) {
+                            return ReasonReact.Router[/* unwatchUrl */2](touchListen);
+                          }));
+            }),
+          /* didUpdate */component[/* didUpdate */5],
+          /* willUnmount */component[/* willUnmount */6],
+          /* willUpdate */component[/* willUpdate */7],
+          /* shouldUpdate */component[/* shouldUpdate */8],
+          /* render */(function (self) {
+              var match = self[/* state */1][/* activeRoute */0];
+              return React.createElement("div", {
+                          className: root
+                        }, match ? ReasonReact.element(undefined, undefined, RowCalc$KnitZilla.make(/* array */[])) : ReasonReact.element(undefined, undefined, App$KnitZilla.make(/* array */[])));
+            }),
+          /* initialState */(function (param) {
+              return /* record */[/* activeRoute : Home */0];
+            }),
+          /* retainedProps */component[/* retainedProps */11],
+          /* reducer */(function (action, _state) {
+              return /* Update */Block.__(0, [/* record */[/* activeRoute */action[0]]]);
+            }),
+          /* jsElementWrapped */component[/* jsElementWrapped */13]
+        ];
+}
+
+var $$default = ReasonReact.wrapReasonForJs(component, (function (jsProps) {
+        return make(jsProps.children);
+      }));
 
 exports.Styles = Styles;
+exports.component = component;
+exports.make = make;
+exports.$$default = $$default;
+exports.default = $$default;
+exports.__esModule = true;
 /* root Not a pure module */
