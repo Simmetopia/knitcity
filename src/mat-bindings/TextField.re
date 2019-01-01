@@ -10,6 +10,7 @@ type jsProps = {
   label: ReasonReact.reactElement,
   fullWidth: bool,
   onChange: ReactEvent.Form.t => unit,
+  disabled: Js.nullable(bool),
 };
 
 [@bs.deriving jsConverter]
@@ -26,6 +27,7 @@ let make =
       ~label,
       ~type_,
       ~variant=`standard,
+      ~disabled=?,
       children,
     ) =>
   ReasonReact.wrapJsForReason(
@@ -37,6 +39,7 @@ let make =
         ~fullWidth,
         ~label,
         ~type_=type_ |> type_ToJs,
+        ~disabled=disabled |> Js.Nullable.fromOption,
         ~onChange,
       ),
     children,

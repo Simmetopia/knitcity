@@ -6,6 +6,7 @@ var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var Js_mapperRt = require("bs-platform/lib/js/js_mapperRt.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Button = require("@material-ui/core/Button/Button");
+var IconButton = require("@material-ui/core/IconButton/IconButton");
 
 var jsMapperConstantArray = /* array */[
   /* tuple */[
@@ -72,9 +73,25 @@ function make(variant, onClick, color, children) {
   return ReasonReact.wrapJsForReason(Button.default, tmp, children);
 }
 
+function make$1(onClick, className, children) {
+  var tmp = {
+    onClick: onClick
+  };
+  var tmp$1 = Js_option.map((function (a) {
+          return a;
+        }), className);
+  if (tmp$1 !== undefined) {
+    tmp.className = Caml_option.valFromOption(tmp$1);
+  }
+  return ReasonReact.wrapJsForReason(IconButton.default, tmp, children);
+}
+
+var IconButton$1 = /* module */[/* make */make$1];
+
 exports.variantToJs = variantToJs;
 exports.variantFromJs = variantFromJs;
 exports.colorToJs = colorToJs;
 exports.colorFromJs = colorFromJs;
 exports.make = make;
+exports.IconButton = IconButton$1;
 /* ReasonReact Not a pure module */

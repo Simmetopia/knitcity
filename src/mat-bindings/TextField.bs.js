@@ -3,6 +3,7 @@
 
 var Js_mapperRt = require("bs-platform/lib/js/js_mapperRt.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Js_null_undefined = require("bs-platform/lib/js/js_null_undefined.js");
 var TextField = require("@material-ui/core/TextField/TextField");
 
 var jsMapperConstantArray = /* array */[
@@ -51,7 +52,7 @@ function type_FromJs(param) {
   return Js_mapperRt.revSearch(3, jsMapperConstantArray$1, param);
 }
 
-function make(value, fullWidth, onChange, label, type_, $staropt$star, children) {
+function make(value, fullWidth, onChange, label, type_, $staropt$star, disabled, children) {
   var variant = $staropt$star !== undefined ? $staropt$star : /* standard */-361220291;
   return ReasonReact.wrapJsForReason(TextField.default, {
               variant: variantToJs(variant),
@@ -59,7 +60,8 @@ function make(value, fullWidth, onChange, label, type_, $staropt$star, children)
               value: value,
               label: label,
               fullWidth: fullWidth,
-              onChange: onChange
+              onChange: onChange,
+              disabled: Js_null_undefined.fromOption(disabled)
             }, children);
 }
 

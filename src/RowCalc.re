@@ -1,3 +1,9 @@
+module Styles = {
+  open Css;
+  let floatingRightSideBack =
+    style([position(absolute), top(`percent(50.0)), left(px(5))]);
+};
+
 type state = {rows: int};
 
 type actions =
@@ -19,26 +25,44 @@ let make = _children => {
   reducer,
   initialState,
   render: self => {
-    <Grid direction=`column alignItems=`center>
-      <Grid.Item>
-        <Typography variant=`h6>
-          {ReasonReact.string(string_of_int(self.state.rows))}
-        </Typography>
-      </Grid.Item>
-      <Grid.Item>
-        <Grid>
+    <>
+      <div className=App.Styles.innerRoot>
+        <Grid direction=`column alignItems=`center>
           <Grid.Item>
-            <Button variant=`text onClick={_e => self.send(Increment)}>
-              {ReasonReact.string("+1")}
-            </Button>
+            /* <Typography variant=`h6>
+              {ReasonReact.string(string_of_int(self.state.rows))}
+            </Typography> */
+            <TextField
+              variant=`outlined
+              value={string_of_int(self.state.rows)}
+              onChange={_e => ()}
+              type_=`number
+              fullWidth=true
+              label={ReasonReact.string({js|Maske antal|js})}
+              disabled=true
+            />
           </Grid.Item>
           <Grid.Item>
-            <Button variant=`text onClick={_e => self.send(Reset)}>
-              {ReasonReact.string("Reset")}
-            </Button>
+            <Grid>
+              <Grid.Item>
+                <Button variant=`text onClick={_e => self.send(Increment)}>
+                  {ReasonReact.string("+1")}
+                </Button>
+              </Grid.Item>
+              <Grid.Item>
+                <Button variant=`text onClick={_e => self.send(Reset)}>
+                  {ReasonReact.string("Reset")}
+                </Button>
+              </Grid.Item>
+            </Grid>
           </Grid.Item>
         </Grid>
-      </Grid.Item>
-    </Grid>;
+      </div>
+      <div
+        className=Styles.floatingRightSideBack
+        onClick={_e => ReasonReact.Router.push("/")}>
+        <NavigationIcons.Back />
+      </div>
+    </>;
   },
 };

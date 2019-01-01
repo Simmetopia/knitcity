@@ -29,6 +29,8 @@ module Styles = {
       left(`percent(50.0)),
       transform(translate(`percent(-50.0), `percent(-50.0))),
     ]);
+  let floatingNextButton =
+    style([position(absolute), top(`percent(50.0)), right(px(5))]);
 };
 
 type state = {
@@ -111,12 +113,11 @@ let make = _children => {
           </Grid.Item>
         </Grid>
       </div>
-      <Button
-        color=`primary
-        variant=`contained
+      <div
+        className=Styles.floatingNextButton
         onClick={_e => ReasonReact.Router.push("/calc")}>
-        {ReasonReact.string("Rower")}
-      </Button>
+        <NavigationIcons.Forward />
+      </div>
     </>;
   },
 };

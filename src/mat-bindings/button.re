@@ -24,3 +24,23 @@ let make = (~variant=?, ~onClick, ~color=?, children) => {
     children,
   );
 };
+
+module IconButton = {
+  [@bs.module "@material-ui/core/IconButton/IconButton"]
+  external button: ReasonReact.reactClass = "default";
+  [@bs.obj]
+  external makeProps: (~onClick: onClick, ~className: string=?, unit) => _ =
+    "";
+  let make = (~onClick, ~className=?, children) => {
+    ReasonReact.wrapJsForReason(
+      ~reactClass=button,
+      ~props=
+        makeProps(
+          ~onClick,
+          ~className=?className |> Js.Option.map((. a) => a),
+          (),
+        ),
+      children,
+    );
+  };
+};

@@ -9,9 +9,9 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Caml_primitive = require("bs-platform/lib/js/caml_primitive.js");
 var Grid$KnitZilla = require("./mat-bindings/Grid.bs.js");
 var Util$KnitZilla = require("./util.bs.js");
-var Button$KnitZilla = require("./mat-bindings/button.bs.js");
 var TextField$KnitZilla = require("./mat-bindings/TextField.bs.js");
 var Typography$KnitZilla = require("./mat-bindings/Typography.bs.js");
+var NavigationIcons$KnitZilla = require("./mat-bindings/NavigationIcons.bs.js");
 
 var headerStyle = Css.style(/* :: */[
       Css.position(Css.absolute),
@@ -90,7 +90,24 @@ var innerRoot = Css.style(/* :: */[
       ]
     ]);
 
-var Styles = /* module */[/* innerRoot */innerRoot];
+var floatingNextButton = Css.style(/* :: */[
+      Css.position(Css.absolute),
+      /* :: */[
+        Css.top(/* `percent */[
+              -119887163,
+              50.0
+            ]),
+        /* :: */[
+          Css.right(Css.px(5)),
+          /* [] */0
+        ]
+      ]
+    ]);
+
+var Styles = /* module */[
+  /* innerRoot */innerRoot,
+  /* floatingNextButton */floatingNextButton
+];
 
 var component$1 = ReasonReact.reducerComponent("AppRoot");
 
@@ -122,14 +139,17 @@ function make$1(_children) {
                             }, ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, /* center */98248149, /* column */-963948842, /* center */98248149, /* Sixteen */2, /* array */[
                                       ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$KnitZilla.make(match ? "" : String(self[/* state */1][/* currentMasks */0]), true, (function (e) {
                                                             return Curry._1(self[/* send */3], /* SetCurrentMasks */Block.__(0, [e.target.valueAsNumber]));
-                                                          }), "Antal masker", /* number */561678025, /* outlined */613841570, /* array */[]))])),
+                                                          }), "Antal masker", /* number */561678025, /* outlined */613841570, undefined, /* array */[]))])),
                                       ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, TextField$KnitZilla.make(match$1 ? "" : String(self[/* state */1][/* masksToInsert */1]), true, (function (e) {
                                                             return Curry._1(self[/* send */3], /* SetMasksToInsert */Block.__(1, [e.target.valueAsNumber]));
-                                                          }), "Indsæt", /* number */561678025, /* outlined */613841570, /* array */[]))])),
+                                                          }), "Indsæt", /* number */561678025, /* outlined */613841570, undefined, /* array */[]))])),
                                       ReasonReact.element(undefined, undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, Util$KnitZilla.Result[/* make */1](Util$KnitZilla.calculateMasks(self[/* state */1][/* currentMasks */0], self[/* state */1][/* masksToInsert */1]), /* array */[]))]))
-                                    ]))), ReasonReact.element(undefined, undefined, Button$KnitZilla.make(/* contained */1064531251, (function (_e) {
-                                    return ReasonReact.Router[/* push */0]("/calc");
-                                  }), /* primary */58474434, /* array */["Rower"])));
+                                    ]))), React.createElement("div", {
+                              className: floatingNextButton,
+                              onClick: (function (_e) {
+                                  return ReasonReact.Router[/* push */0]("/calc");
+                                })
+                            }, ReasonReact.element(undefined, undefined, NavigationIcons$KnitZilla.Forward[/* make */0](undefined, /* array */[]))));
             }),
           /* initialState */(function (param) {
               return /* record */[
