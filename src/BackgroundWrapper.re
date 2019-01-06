@@ -62,9 +62,9 @@ let make = _children => {
       let totalWindowWidth =
         float_of_int(touch##target->Webapi.Dom.Element.clientWidth);
       let screenChange = x^ - touch##clientX;
-      let minReqMovement = totalWindowWidth *. 0.40;
+      let minReqMovement = totalWindowWidth *. 0.25;
       let dir = screenChange > 0 ? Left : Right;
-      if (abs(screenChange)>int_of_float(minReqMovement)) {
+      if (abs(screenChange) > int_of_float(minReqMovement)) {
         switch (dir) {
         | Left => ReasonReact.Router.push("/calc")
         | Right => ReasonReact.Router.push("/")

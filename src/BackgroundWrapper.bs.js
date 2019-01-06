@@ -80,7 +80,7 @@ function make(_children) {
                       var touch = Caml_array.caml_array_get(e.changedTouches, 0);
                       var totalWindowWidth = touch.target.clientWidth;
                       var screenChange = x[0] - touch.clientX | 0;
-                      var minReqMovement = totalWindowWidth * 0.40;
+                      var minReqMovement = totalWindowWidth * 0.25;
                       var match = screenChange > 0;
                       var dir = match ? /* Left */0 : /* Right */1;
                       if (Pervasives.abs(screenChange) > (minReqMovement | 0)) {
