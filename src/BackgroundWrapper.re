@@ -20,13 +20,20 @@ module Styles = {
 type routes =
   | Home
   | Calc;
-type state = {activeRoute: routes};
+type state = {
+  activeRoute: routes,
+  startClientX: int,
+};
 
 type actions =
-  | Route(routes);
+  | Route(routes)
+  | TouchStart(int);
 
+type direction =
+  | Left
+  | Right;
 let component = ReasonReact.reducerComponent("BackgroundWrapper");
-
+let x = ref(0);
 let make = _children => {
   ...component,
   didMount: self => {
@@ -37,14 +44,46 @@ let make = _children => {
         | _ => self.send(Route(Home))
         }
       );
+    // a little better logic here please. But this works
+    addEventListener("touchstart", e => {
+      let touch =
+        ReactEvent.Touch.touches(e)
+        ->TouchEvent.Touch.castReactTouchListToTouchArray
+        ->(Array.get(0));
+      let touchVal = touch##clientX;
+      x := touchVal;
+    });
+
+    addEventListener("touchend", e => {
+      let touch =
+        ReactEvent.Touch.changedTouches(e)
+        ->TouchEvent.Touch.castReactTouchListToTouchArray
+        ->(Array.get(0));
+      let totalWindowWidth =
+        float_of_int(touch##target->Webapi.Dom.Element.clientWidth);
+      let screenChange = x^ - touch##clientX;
+      let minReqMovement = totalWindowWidth *. 0.40;
+      let dir = screenChange > 0 ? Left : Right;
+      if (abs(screenChange)>int_of_float(minReqMovement)) {
+        switch (dir) {
+        | Left => ReasonReact.Router.push("/calc")
+        | Right => ReasonReact.Router.push("/")
+        };
+      };
+      x := 0;
+    });
+
     self.onUnmount(() => ReasonReact.Router.unwatchUrl(touchListen));
   },
-  reducer: (action, _state) => {
+  reducer: (action, state) => {
     switch (action) {
-    | Route(toChange) => ReasonReact.Update({activeRoute: toChange})
+    | Route(toChange) =>
+      ReasonReact.Update({...state, activeRoute: toChange})
+    | TouchStart(startX) =>
+      ReasonReact.Update({...state, startClientX: startX})
     };
   },
-  initialState: () => {activeRoute: Home},
+  initialState: () => {activeRoute: Home, startClientX: 0},
   render: self =>
     <div className=Styles.root>
       <App.Header />
