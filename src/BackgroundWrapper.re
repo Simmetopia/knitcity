@@ -89,7 +89,7 @@ let make = _children => {
       <App.Header />
       {switch (self.state.activeRoute) {
        | Home => <App />
-       | Calc => <RowCalc />
+       | Calc => <RowCalcRoot />
        }}
     </div>,
 };

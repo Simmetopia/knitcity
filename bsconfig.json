@@ -1,7 +1,12 @@
 {
   "name": "KnitZilla",
   "reason": { "react-jsx": 2 },
-  "sources": [{ "dir": "src", "subdirs": true }],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
   "package-specs": [
     {
       "module": "commonjs",
@@ -10,6 +15,12 @@
   ],
   "suffix": ".bs.js",
   "namespace": true,
-  "bs-dependencies": ["reason-react", "bs-css","bs-webapi"],
-  "refmt": 3
+  "bs-dependencies": [
+    "reason-react",
+    "bs-css",
+    "bs-webapi",
+    "@glennsl/bs-json"
+  ],
+  "refmt": 3,
+  "bs-dev-dependencies": ["@glennsl/bs-jest"]
 }
