@@ -31,13 +31,30 @@ module Styles = {
       borderRadius(px(5)),
       padding2(~v=px(12), ~h=px(24)),
     ]);
+  let formControl =
+    style([
+      position(absolute),
+      bottom(`percent(5.0)),
+      right(`percent(50.0)),
+      transform(translateX(`percent(50.0))),
+    ]);
+  let counterContainer =
+    style([
+      width(`percent(80.0)),
+      overflowY(auto),
+      height(`percent(60.0)),
+    ]);
 };
-type state = {rows: RowCalcParser.rows};
+type state = {
+  rows: RowCalcParser.rows,
+  titleVal: string,
+};
 type actions =
   | AddNewRow
   | RemoveRow
   | Reset
   | UpdateRowIncrement(int)
+  | ChangeText(string)
   | UpdateRowReset(int);
 
 let component = ReasonReact.reducerComponent("RowCalcRoot");
@@ -57,15 +74,18 @@ let make = _children => {
 
       | None => [||]
       };
-    {rows: rows};
+    {rows, titleVal: ""};
   },
   reducer: (action, state) => {
     switch (action) {
     | AddNewRow =>
-      let newRows: RowCalcParser.rows = [|{title: "a title", rows: 0}|];
-      ReasonReact.Update({rows: Array.concat([state.rows, newRows])});
+      let newRows: RowCalcParser.rows = [|{title: state.titleVal, rows: 0}|];
+      ReasonReact.Update({
+        rows: Array.concat([state.rows, newRows]),
+        titleVal: "",
+      });
     | RemoveRow => ReasonReact.Update(state)
-    | Reset => ReasonReact.Update({rows: [||]})
+    | Reset => ReasonReact.Update({...state, rows: [||]})
     | UpdateRowIncrement(index) =>
       let newState = state;
       let toUpdate = newState.rows[index];
@@ -76,6 +96,8 @@ let make = _children => {
       let toUpdate = newState.rows[index];
       newState.rows[index] = {title: toUpdate.title, rows: 0};
       ReasonReact.Update(newState);
+    | ChangeText(toChange) =>
+      ReasonReact.Update({...state, titleVal: toChange})
     };
   },
   didUpdate: ({newSelf}) => {
@@ -90,14 +112,8 @@ let make = _children => {
   },
   render: self => {
     <>
-      <div className=App.Styles.innerRoot>
-        <Button onClick={_e => self.send(AddNewRow)}>
-          {ReasonReact.string("+ counter")}
-        </Button>
-        <Button onClick={_e => self.send(Reset)}>
-          {ReasonReact.string("Reset")}
-        </Button>
-        <Grid>
+      <div className={App.Styles.innerRoot ++ " " ++ Styles.counterContainer}>
+        <Grid justify=`center>
           {self.state.rows
            |> Array.mapi((index, a: RowCalcParser.rowCalc) =>
                 <Grid.Item key={string_of_int(index)}>
@@ -116,6 +132,23 @@ let make = _children => {
               )
            |> ReasonReact.array}
         </Grid>
+      </div>
+      <div className=Styles.formControl>
+        <Button onClick={_e => self.send(AddNewRow)}>
+          {ReasonReact.string("+ counter")}
+        </Button>
+        <Button onClick={_e => self.send(Reset)}>
+          {ReasonReact.string("Reset")}
+        </Button>
+        <TextField
+          value={self.state.titleVal}
+          type_=`text
+          fullWidth=false
+          label={ReasonReact.string("Name")}
+          onChange={e =>
+            self.send(ChangeText(ReactEvent.Form.target(e)##value))
+          }
+        />
       </div>
       <div
         className=Styles.floatingRightSideBack

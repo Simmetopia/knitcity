@@ -16,6 +16,7 @@ var App$KnitZilla = require("./App.bs.js");
 var Grid$KnitZilla = require("./mat-bindings/Grid.bs.js");
 var Button$KnitZilla = require("./mat-bindings/button.bs.js");
 var RowCalc$KnitZilla = require("./RowCalc.bs.js");
+var TextField$KnitZilla = require("./mat-bindings/TextField.bs.js");
 var NavigationIcons$KnitZilla = require("./mat-bindings/NavigationIcons.bs.js");
 
 function decodeRow(jsonString) {
@@ -81,9 +82,51 @@ var numberWrapper = Css.style(/* :: */[
       ]
     ]);
 
+var formControl = Css.style(/* :: */[
+      Css.position(Css.absolute),
+      /* :: */[
+        Css.bottom(/* `percent */[
+              -119887163,
+              5.0
+            ]),
+        /* :: */[
+          Css.right(/* `percent */[
+                -119887163,
+                50.0
+              ]),
+          /* :: */[
+            Css.transform(Css.translateX(/* `percent */[
+                      -119887163,
+                      50.0
+                    ])),
+            /* [] */0
+          ]
+        ]
+      ]
+    ]);
+
+var counterContainer = Css.style(/* :: */[
+      Css.width(/* `percent */[
+            -119887163,
+            80.0
+          ]),
+      /* :: */[
+        Css.overflowY(Css.auto),
+        /* :: */[
+          Css.height(/* `percent */[
+                -119887163,
+                60.0
+              ]),
+          /* [] */0
+        ]
+      ]
+    ]);
+
 var Styles = /* module */[
   /* floatingRightSideBack */floatingRightSideBack,
-  /* numberWrapper */numberWrapper
+  /* numberWrapper */numberWrapper,
+  /* formControl */formControl,
+  /* counterContainer */counterContainer
 ];
 
 var component = ReasonReact.reducerComponent("RowCalcRoot");
@@ -106,20 +149,24 @@ function make(_children) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
               return React.createElement(React.Fragment, undefined, React.createElement("div", {
-                              className: App$KnitZilla.Styles[/* innerRoot */0]
-                            }, ReasonReact.element(undefined, undefined, Button$KnitZilla.make(undefined, (function (_e) {
-                                        return Curry._1(self[/* send */3], /* AddNewRow */0);
-                                      }), undefined, /* array */["+ counter"])), ReasonReact.element(undefined, undefined, Button$KnitZilla.make(undefined, (function (_e) {
-                                        return Curry._1(self[/* send */3], /* Reset */2);
-                                      }), undefined, /* array */["Reset"])), ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, undefined, undefined, undefined, undefined, /* array */[$$Array.mapi((function (index, a) {
+                              className: App$KnitZilla.Styles[/* innerRoot */0] + (" " + counterContainer)
+                            }, ReasonReact.element(undefined, undefined, Grid$KnitZilla.make(undefined, undefined, undefined, /* center */98248149, undefined, /* array */[$$Array.mapi((function (index, a) {
                                               return ReasonReact.element(String(index), undefined, Grid$KnitZilla.Item[/* make */0](undefined, /* array */[ReasonReact.element(undefined, undefined, RowCalc$KnitZilla.make(a[/* rows */1], a[/* title */0], (function (action) {
                                                                           if (action.tag) {
-                                                                            return Curry._1(self[/* send */3], /* UpdateRowReset */Block.__(1, [action[0]]));
+                                                                            return Curry._1(self[/* send */3], /* UpdateRowReset */Block.__(2, [action[0]]));
                                                                           } else {
                                                                             return Curry._1(self[/* send */3], /* UpdateRowIncrement */Block.__(0, [action[0]]));
                                                                           }
                                                                         }), index, /* array */[]))]));
                                             }), self[/* state */1][/* rows */0])]))), React.createElement("div", {
+                              className: formControl
+                            }, ReasonReact.element(undefined, undefined, Button$KnitZilla.make(undefined, (function (_e) {
+                                        return Curry._1(self[/* send */3], /* AddNewRow */0);
+                                      }), undefined, /* array */["+ counter"])), ReasonReact.element(undefined, undefined, Button$KnitZilla.make(undefined, (function (_e) {
+                                        return Curry._1(self[/* send */3], /* Reset */2);
+                                      }), undefined, /* array */["Reset"])), ReasonReact.element(undefined, undefined, TextField$KnitZilla.make(self[/* state */1][/* titleVal */1], false, (function (e) {
+                                        return Curry._1(self[/* send */3], /* ChangeText */Block.__(1, [e.target.value]));
+                                      }), "Name", /* text */-856044371, undefined, undefined, /* array */[]))), React.createElement("div", {
                               className: floatingRightSideBack,
                               onClick: (function (_e) {
                                   return ReasonReact.Router[/* push */0]("/");
@@ -135,7 +182,10 @@ function make(_children) {
               } else {
                 rows = /* array */[];
               }
-              return /* record */[/* rows */rows];
+              return /* record */[
+                      /* rows */rows,
+                      /* titleVal */""
+                    ];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
@@ -143,38 +193,53 @@ function make(_children) {
                 switch (action) {
                   case 0 : 
                       var newRows = /* array */[/* record */[
-                          /* title */"a title",
+                          /* title */state[/* titleVal */1],
                           /* rows */0
                         ]];
-                      return /* Update */Block.__(0, [/* record */[/* rows */$$Array.concat(/* :: */[
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* rows */$$Array.concat(/* :: */[
                                         state[/* rows */0],
                                         /* :: */[
                                           newRows,
                                           /* [] */0
                                         ]
-                                      ])]]);
+                                      ]),
+                                  /* titleVal */""
+                                ]]);
                   case 1 : 
                       return /* Update */Block.__(0, [state]);
                   case 2 : 
-                      return /* Update */Block.__(0, [/* record */[/* rows : array */[]]]);
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* rows : array */[],
+                                  /* titleVal */state[/* titleVal */1]
+                                ]]);
                   
                 }
-              } else if (action.tag) {
-                var index = action[0];
-                var toUpdate = Caml_array.caml_array_get(state[/* rows */0], index);
-                Caml_array.caml_array_set(state[/* rows */0], index, /* record */[
-                      /* title */toUpdate[/* title */0],
-                      /* rows */0
-                    ]);
-                return /* Update */Block.__(0, [state]);
               } else {
-                var index$1 = action[0];
-                var toUpdate$1 = Caml_array.caml_array_get(state[/* rows */0], index$1);
-                Caml_array.caml_array_set(state[/* rows */0], index$1, /* record */[
-                      /* title */toUpdate$1[/* title */0],
-                      /* rows */toUpdate$1[/* rows */1] + 1 | 0
-                    ]);
-                return /* Update */Block.__(0, [state]);
+                switch (action.tag | 0) {
+                  case 0 : 
+                      var index = action[0];
+                      var toUpdate = Caml_array.caml_array_get(state[/* rows */0], index);
+                      Caml_array.caml_array_set(state[/* rows */0], index, /* record */[
+                            /* title */toUpdate[/* title */0],
+                            /* rows */toUpdate[/* rows */1] + 1 | 0
+                          ]);
+                      return /* Update */Block.__(0, [state]);
+                  case 1 : 
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* rows */state[/* rows */0],
+                                  /* titleVal */action[0]
+                                ]]);
+                  case 2 : 
+                      var index$1 = action[0];
+                      var toUpdate$1 = Caml_array.caml_array_get(state[/* rows */0], index$1);
+                      Caml_array.caml_array_set(state[/* rows */0], index$1, /* record */[
+                            /* title */toUpdate$1[/* title */0],
+                            /* rows */0
+                          ]);
+                      return /* Update */Block.__(0, [state]);
+                  
+                }
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
