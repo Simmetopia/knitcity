@@ -6,7 +6,7 @@ module Header = {
         position(absolute),
         top(px(25)),
         width(`percent(100.0)),
-        color(hsl(28, 100, 94)),
+        color(hex("fff")),
       ]);
   };
   let component = ReasonReact.statelessComponent("Header");
@@ -67,15 +67,15 @@ let make = _children => {
     <>
       <div className=Styles.innerRoot>
         <Grid
-          spacing=Sixteen direction=`column alignItems=`center justify=`center>
+          spacing=Three direction=`column alignItems=`center justify=`center>
           <Grid.Item>
             <TextField
               variant=`outlined
               label={ReasonReact.string("Antal masker")}
               fullWidth=true
               value={
-                self.state.currentMasks === 0 ?
-                  "" : string_of_int(self.state.currentMasks)
+                self.state.currentMasks === 0
+                  ? "" : string_of_int(self.state.currentMasks)
               }
               type_=`number
               onChange={e =>
@@ -92,8 +92,8 @@ let make = _children => {
               type_=`number
               fullWidth=true
               value={
-                self.state.masksToInsert === 0 ?
-                  "" : string_of_int(self.state.masksToInsert)
+                self.state.masksToInsert === 0
+                  ? "" : string_of_int(self.state.masksToInsert)
               }
               onChange={e =>
                 self.send(

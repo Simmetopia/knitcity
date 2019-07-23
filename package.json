@@ -3,22 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@glennsl/bs-jest": "^0.4.7",
-    "@glennsl/bs-json": "^3.0.0",
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
-    "@types/jest": "24.0.9",
-    "@types/node": "11.10.4",
-    "@types/react": "16.8.6",
-    "@types/react-dom": "16.8.2",
-    "bs-css": "^8.0.2",
-    "bs-webapi": "^0.13.4",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5",
-    "reason-react": "^0.5.3",
-    "serve": "^10.1.2",
-    "typescript": "3.3.3333"
+    "@glennsl/bs-jest": "^0.4.8",
+    "@glennsl/bs-json": "^4.0.0",
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
+    "@types/jest": "24.0.15",
+    "@types/node": "12.6.8",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "bs-css": "^9.0.1",
+    "bs-webapi": "^0.15.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "reason-react": "^0.7.0",
+    "serve": "^11.1.0",
+    "typescript": "3.5.3"
   },
   "scripts": {
     "start:prod": "yarn serve -s build",
@@ -38,6 +38,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "bs-platform": "^4.0.18"
+    "bs-platform": "^5.0.6"
   }
 }

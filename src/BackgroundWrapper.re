@@ -11,7 +11,7 @@ module Styles = {
       backgroundImage(
         linearGradient(
           grad(0.0),
-          [(0, `hex("A5A6C5")), (100, `hex("F8DFC9"))],
+          [(px(0), `hex("A5A6C5")), (px(100), `hex("F8DFC9"))],
         ),
       ),
     ]);

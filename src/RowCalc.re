@@ -22,21 +22,14 @@ let make =
       <Typography> {ReasonReact.string(title)} </Typography>
       <Grid direction=`column alignItems=`center>
         <Grid.Item>
-          <div className=Styles.numberWrapper>
+          <div
+            onClick={_e => newValues(Count(index))}
+            className=Styles.numberWrapper>
             <Typography variant=`h6>
               {ReasonReact.string(string_of_int(rows))}
             </Typography>
           </div>
         </Grid.Item>
-        /* <TextField
-             variant=`outlined
-             value={string_of_int(self.state.rows)}
-             onChange={_e => ()}
-             type_=`number
-             fullWidth=true
-             label={ReasonReact.string({js|Maske antal|js})}
-             disabled=true
-           /> */
         <Grid.Item>
           <Grid>
             <Grid.Item>

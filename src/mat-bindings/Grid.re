@@ -41,9 +41,9 @@ type justify = [
 [@bs.deriving jsConverter]
 type spacing =
   | Zero
-  | [@bs.as 8] Eight
-  | [@bs.as 16] Sixteen
-  | [@bs.as 32] ThirtyTwo;
+  | [@bs.as 1] One
+  | [@bs.as 2] Two
+  | [@bs.as 3] Three;
 
 [@bs.deriving abstract]
 type jsProps = {
